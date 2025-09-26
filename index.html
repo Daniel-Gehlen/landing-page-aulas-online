@@ -613,57 +613,30 @@
       </div>
     </section>
 
-    <!-- Newsletter -->
+    <!-- Newsletter Section Simplificada -->
     <section class="section-padding">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            <h2 class="section-title">Fique por Dentro das Novidades</h2>
-            <p class="mb-4">
-              Receba dicas de música, avisos sobre promoções e conteúdos
-              exclusivos.
-            </p>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2 class="section-title">Fique por Dentro das Novidades</h2>
+                    <p class="mb-4">Receba dicas de música, avisos sobre promoções e conteúdos exclusivos.</p>
 
-            <form id="newsletter-form" class="newsletter-form">
-              <div class="mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nome"
-                  placeholder="Seu nome completo"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Seu melhor e-mail"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary w-100">
-                Inscrever-se
-              </button>
-              <p class="text-muted mt-2">
-                <small
-                  >Respeitamos sua privacidade. Você pode cancelar a qualquer
-                  momento.</small
-                >
-              </p>
-            </form>
+                    <div class="newsletter-simple">
+                        <a href="mailto:harmonia251251@gmail.com?subject=Inscrição na Newsletter - Aulas de Música&body=Olá, Professor Daniel! Gostaria de me inscrever na Newsletter das aulas online de música. Obrigado!"
+                          class="btn btn-primary btn-lg">
+                          <i class="fas fa-envelope me-2"></i>Quero Receber as Novidades
+                        </a>
 
-            <div
-              id="newsletter-success"
-              class="alert alert-success mt-3 d-none"
-            >
-              Obrigado por se inscrever! Em breve você receberá nossas
-              novidades.
+                        <p class="text-muted mt-3">
+                            <small>
+                                <strong>Como funciona:</strong> Clique no botão acima para abrir seu email
+                                com mensagem pré-pronta. Basta clicar em "Enviar"!
+                            </small>
+                        </p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Footer -->
@@ -673,20 +646,22 @@
           <div class="col-md-6 mb-4">
             <h4>Professor Daniel Gehlen</h4>
             <p>Formado em Música pela UFRGS</p>
-            <p>Especializado em violão, guitarra e ukulêle</p>
+            <p>Especializado em violão, guitarra e ukulêle Online</p>
           </div>
           <div class="col-md-6 mb-4 text-md-end">
             <h4>Contato</h4>
-            <p><i class="fas fa-envelope me-2"></i>dgmusicguide@gmail.com</p>
+            <p><i class="fas fa-envelope me-2"></i>harmonia251251@gmail.com</p>
             <div class="social-icons">
-              <a href="https://www.instagram.com/dgmusicguide/" target="_blank"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-              <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/dgmusicguide/" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@danielgehlen6486" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://wa.me/5551989345497?text=Olá,%20Prof.%20Daniel!%20Sou%20maior%20de%20idade%20e%20vim%20da%20sua%20Landing%20Page.%20Gostaria%20de%20mais%20informações%20sobre%20as%20aulas%20Online." target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
             </div>
-          </div>
-        </div>
         <hr class="my-4" />
         <div class="row">
           <div class="col-md-12 text-center">
@@ -702,53 +677,9 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Newsletter Script -->
-    <script>
-      document
-        .getElementById("newsletter-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
 
-          const nome = document.getElementById("nome").value;
-          const email = document.getElementById("email").value;
+    <!-- Adicione o EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-          // Armazenar os dados localmente (substituir por API no futuro)
-          let inscritos = JSON.parse(
-            localStorage.getItem("newsletterInscritos") || "[]"
-          );
-          inscritos.push({ nome, email, data: new Date().toISOString() });
-          localStorage.setItem(
-            "newsletterInscritos",
-            JSON.stringify(inscritos)
-          );
-
-          // Mostrar mensagem de sucesso
-          document
-            .getElementById("newsletter-success")
-            .classList.remove("d-none");
-          document.getElementById("newsletter-form").reset();
-
-          // Opcional: Enviar para um webhook ou email (quando tiver hospedagem)
-          // fetch('https://seu-webhook-aqui', { method: 'POST', body: JSON.stringify({nome, email}) });
-        });
-
-      // Função para exportar inscritos (para você acessar os dados)
-      function exportarInscritos() {
-        const inscritos = JSON.parse(
-          localStorage.getItem("newsletterInscritos") || "[]"
-        );
-        const csv =
-          "Nome,Email,Data\n" +
-          inscritos
-            .map((i) => `"${i.nome}","${i.email}","${i.data}"`)
-            .join("\n");
-        const blob = new Blob([csv], { type: "text/csv" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "inscritos-newsletter.csv";
-        a.click();
-      }
-    </script>
   </body>
 </html>
